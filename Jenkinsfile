@@ -10,13 +10,11 @@ pipeline {
 			}
         }
 	stage('RunSCAAnalysisUsingSnyk') {
-			steps {
-				withcredentials ([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) { 
-					sh 'mun snyk: test -fn' 
+            steps {		
+				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+					sh 'mvn snyk:test -fn'
 				}
-		     }
-	   }
-	   
-	}
+			}
+    }	
   }
 }
